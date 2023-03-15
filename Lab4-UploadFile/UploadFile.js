@@ -8,9 +8,14 @@ http.createServer(function (req, res) {
         form.parse(req, function (err, fields, files) {
             var oldpath = files.filetoupload.filepath;
             // Rename File Upload
-            let time = new Date().getTime;
-            
-            var newpath = 'C:/Users/Admin/Downloads/' + time + files.filetoupload.originalFilename;
+            let date = new Date().getDate();
+            let month = new Date().getMonth() + 1;
+            let year = new Date().getFullYear();
+
+            let time = date + '-' + month + '-' + year;
+
+            var newpath = 'C:/Users/Admin/Downloads/' + time + '-' + files.filetoupload.originalFilename;
+            console.log(time);
             fs.rename(oldpath, newpath, function (err) {
                 if (err) throw err;
                 res.write('File uploaded and moved!');
