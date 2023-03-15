@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Máy tính cá nhân</title>
+    <link href="style.css" rel="stylesheet" />
+    <script>
+        function numberPressed(num) {
+            document.getElementById('result').value += num;
+        }
+        function operatorPressed(op) {
+            document.getElementById('result').value += op;
+        }
+        function clearResult() {
+            document.getElementById('result').value = '';
+        }
+        function calculateResult() {
+            var result = eval(document.getElementById('result').value);
+            document.getElementById('result').value = result;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>MÁY TÍNH</h1>
+    <input type="text" id="result" disabled>
+    <br>
+    <br>
+    <button onclick="numberPressed('7')">7</button>
+    <button onclick="numberPressed('8')">8</button>
+    <button onclick="numberPressed('9')">9</button>
+    <button onclick="operatorPressed('+')">+</button>
+    <br>
+    <button onclick="numberPressed('4')">4</button>
+    <button onclick="numberPressed('5')">5</button>
+    <button onclick="numberPressed('6')">6</button>
+    <button onclick="operatorPressed('-')">-</button>
+    <br>
+    <button onclick="numberPressed('1')">1</button>
+    <button onclick="numberPressed('2')">2</button>
+    <button onclick="numberPressed('3')">3</button>
+    <button onclick="operatorPressed('*')">*</button>
+    <br>
+    <button onclick="numberPressed('0')">0</button>
+    <button onclick="operatorPressed('/')">/</button>
+    <button onclick="clearResult()">C</button>
+    <button onclick="calculateResult()">=</button>
+    <br />
+</body>
+
+</html>
