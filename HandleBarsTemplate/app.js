@@ -15,7 +15,28 @@ app.engine('hbs', engine({
 
 // Render views
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', {layout: 'main',
+    showBody: true,
+    showContentTinhToan: false
+    });
+    // Chỉ định Home chỉ render trong layout Main
+    // res.render('home');
+});
+
+// Render default layout
+app.get('/tinhToan', (req, res) => {
+    res.render(
+        'defaultView', {
+            layout: 'main',
+            soA: 5,
+            soB: 10,
+            kq: 15,
+            showOperator: true,
+            operator: 'cong',
+            showBody: false,
+            showContentTinhToan: true
+        }
+    );
 });
 
 app.listen(3000);

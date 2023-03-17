@@ -6,9 +6,23 @@
 </head>
 <body>
 
-    <h1>Tiêu đề trang web</h1>
+    <h1>Layout Main</h1>
     {{!-- Nội dung Home --}}
+
+    {{#if showBody}}
+
     {{{body}}}
 
+    {{/if}}
+
+    {{!-- Hiển thị nội dung tính toán --}}
+    {{#if showContentTinhToan}}
+
+    <h2>Num A: {{soA}}</h2>
+    <h2>Num B: {{soB}}</h2>
+    <h2>Operator: {{operator}}</h2>
+    <h2>Result: {{kq}}</h2>
+    
+    {{/if}}
 </body>
 </html>
