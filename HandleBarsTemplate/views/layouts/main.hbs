@@ -6,6 +6,33 @@
 </head>
 <body>
 
+    <script>
+        function myFunction() {
+            var num1 = document.getElementById('num1').value;
+            var num2 = document.getElementById('num2').value;
+            var operator = document.getElementById('operator').value;
+            var result = 0;
+            if (operator == '+') {
+                result = parseInt(num1) + parseInt(num2);
+            } else if (operator == "-") {
+                result = parseInt(num1) - parseInt(num2);
+            } else if (operator == "*") {
+                result = parseInt(num1) * parseInt(num2);
+            } else {
+                if (num2 == 0) {
+                    alert("Lỗi")
+                } else {
+                    result = parseInt(num1) / parseInt(num2);
+                }  
+            }
+            {{!-- document.getElementById('result').value = result; --}}
+            document.getElementById('rs').innerHTML  = "Result: " + result;
+            document.getElementById('numA').innerHTML  = "Num A: " + num1;
+            document.getElementById('numB').innerHTML  = "Num B: " + num2;
+            document.getElementById('op').innerHTML  = "Operator: " + operator;
+        }
+    </script>
+
     <h1>Layout Main</h1>
     {{!-- Nội dung Home --}}
 
@@ -18,10 +45,21 @@
     {{!-- Hiển thị nội dung tính toán --}}
     {{#if showContentTinhToan}}
 
-    <h2>Num A: {{soA}}</h2>
-    <h2>Num B: {{soB}}</h2>
-    <h2>Operator: {{operator}}</h2>
-    <h2>Result: {{kq}}</h2>
+    <input type="number" placeholder="Nhập số A" required id="num1">
+    <input type="number" placeholder="Nhập số B" required id="num2">
+    <select id="operator">
+        <option>+</option>
+        <option>-</option>
+        <option>*</option>
+        <option>/</option>
+    </select>
+    <button onclick="myFunction()">Submit</button>
+    {{!-- <input readonly placeholder="Kết quả" id="result"> --}}
+
+    <h2 id="numA">Num A: {{soA}}</h2>
+    <h2 id="numB">Num B: {{soB}}</h2>
+    <h2 id="op">Operator: {{operator}}</h2>
+    <h2 id="rs">Result: {{kq}}</h2>
     
     {{/if}}
 </body>

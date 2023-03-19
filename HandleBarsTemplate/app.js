@@ -28,11 +28,6 @@ app.get('/tinhToan', (req, res) => {
     res.render(
         'defaultView', {
             layout: 'main',
-            soA: 5,
-            soB: 10,
-            kq: 15,
-            showOperator: true,
-            operator: 'cong',
             showBody: false,
             showContentTinhToan: true
         }
