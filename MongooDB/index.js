@@ -34,7 +34,7 @@ const { request } = require('express');
 app.get('/', async (req, res) => {
 
     await mongoose.connect(uri).then(console.log('Ket noi DB thanh cong.'));
-    sinhviens = await svModel.find();
+    sinhviens = await svModel.find();7
     // try {
     //     console.log(sinhviens);
     //     // res.send(sinhviens);
@@ -53,7 +53,7 @@ app.post('/', async (req, res) => {
     if (req.body._id == null) {
         try {
             svModel.create(req.body)
-            res.redirect('/');
+            res.redirect('/')
         } catch (error) {
             log.error(error);
         }
