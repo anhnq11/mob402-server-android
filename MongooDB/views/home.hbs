@@ -1,0 +1,69 @@
+<div class="container">
+    <form method="post" action="/">
+        <div class="divider d-flex align-items-center my-2">
+            {{#if sinhvien}}
+                <h3 class="text-center fw-bold bm-2 mb-0">Sửa thông tin sinh viên</h3>
+                {{else}}
+                <h3 class="text-center fw-bold bm-2 mb-0">Thêm sinh viên</h3>
+            {{/if}}
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" name="ten" value="{{sinhvien.ten}}" id="ten" placeholder="name@example.com" required>
+                    <label for="ten">Họ và tên</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="number" class="form-control" name="tuoi" value="{{sinhvien.tuoi}}" id="tuoi" placeholder="Password" required>
+                    <label for="tuoi">Tuổi</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" name="diachi" value="{{sinhvien.diachi}}" id="diachi" placeholder="Password">
+                    <label for="diachi">Địa chỉ</label>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-lg-start">
+            {{#if sinhvien}}
+                    <button type="submit" class="btn btn-primary btn-lg fw-bold"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Cập nhật</button>
+                {{else}}
+                    <button type="submit" class="btn btn-primary btn-lg fw-bold"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Thêm</button>
+            {{/if}}
+            
+        </div>
+    </form>
+
+    <div>
+        <table class="table caption-top table-bordered">
+            <caption class="fw-semibold">Danh sách tài khoản</caption>
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center align-middle" scope="col">#</th>
+                    <th class="text-center align-middle" scope="col">Họ và tên</th>
+                    <th class="text-center align-middle" scope="col">Tuổi</th>
+                    <th class="text-center align-middle" scope="col">Địa chỉ</th>
+                    <th class="text-center align-middle" scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each sinhviens}}
+                <tr>
+                    <th class="text-center align-middle" scope="row">{{sum @index 1}}</th>
+                    <td class="text-center align-middle">{{this.ten}}</td>
+                    <td class="text-center align-middle">{{this.tuoi}}</td>
+                    <td class="text-center align-middle">{{this.diachi}}</td>
+                    <td class="text-center align-middle">
+                        <a href="update/{{this._id}}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="delete/{{this._id}}" onclick="return confirm('Are you sure?')"
+                            class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {{else}}
+                <p>No employees to display</p>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

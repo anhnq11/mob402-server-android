@@ -1,33 +1,28 @@
-var http = require('http');
-var formidable = require('formidable');
-var fs = require('fs');
+const express = require('express')
+const app = express()
+const port = 3030
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
 
-http.createServer(function (req, res) {
-    if (req.url == '/fileupload') {
-        var form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-            var oldpath = files.filetoupload.filepath;
-            // Rename File Upload
-            let date = new Date().getDate();
-            let month = new Date().getMonth() + 1;
-            let year = new Date().getFullYear();
+const mongoose = require('mongoose');
 
-            let time = date + '-' + month + '-' + year;
+const uri = 'mongodb+srv://anhnq:Ez54bG4e3L1y6hUT@atlascluster.at4sibr.mongodb.net/TestDB?retryWrites=true&w=majority';
 
-            var newpath = 'C:/Users/Admin/Downloads/' + time + '-' + files.filetoupload.originalFilename;
-            console.log(time);
-            fs.rename(oldpath, newpath, function (err) {
-                if (err) throw err;
-                res.write('File uploaded and moved!');
-                res.end();
-            });
-        });
-    } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
-        res.write('<input type="file" name="filetoupload"><br>');
-        res.write('<input type="submit">');
-        res.write('</form>');
-        return res.end();
+const svModel = require('./SinhVienModel');
+
+app.get('/sinhvien', async (req, res) => {
+    await mongoose.connect(uri).then(console.log('Ket noi DB thanh cong.'));
+
+    const sinhviens = await svModel.find();
+
+    try {
+        console.log(sinhviens);
+        res.send(sinhviens);
+    } catch (error) {
+        res.status(500).send(error);
     }
-}).listen(8080);
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+});
