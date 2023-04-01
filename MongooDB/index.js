@@ -6,12 +6,11 @@ const { engine } = require('express-handlebars');
 const Handlebars = require('handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 
-let sinhviens
+let sinhviens, sinhvien = ''
+let idEdit = ''
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json());
 
 // Cau hinh HBS
 app.engine('hbs', engine({
@@ -34,13 +33,7 @@ const { request } = require('express');
 app.get('/', async (req, res) => {
 
     await mongoose.connect(uri).then(console.log('Ket noi DB thanh cong.'));
-    sinhviens = await svModel.find();7
-    // try {
-    //     console.log(sinhviens);
-    //     // res.send(sinhviens);
-    // } catch (error) {
-    //     res.status(500).send(error);
-    // }
+    sinhviens = await svModel.find();
     res.render('home', {
         sinhviens
     })
@@ -50,28 +43,30 @@ app.get('/', async (req, res) => {
 app.post('/', async (req, res) => {
 
     await mongoose.connect(uri).then(console.log('Ket noi DB thanh cong.'));
-    if (req.body._id == null) {
+        if (idEdit == '')
         try {
             svModel.create(req.body)
             res.redirect('/')
         } catch (error) {
             log.error(error);
         }
-    }
-    else {
-        var rs = await svModel.updateOne({ _id: req.body._id }, req.body)
-        console.log(rs);
-        res.redirect('/')
-    }
+        else{
+            var rs = await svModel.updateOne({ _id: idEdit }, req.body)
+            console.log(rs);
+            res.redirect('/')
+            sinhvien = ''
+            idEdit = ''
+        }
 });
 
 // Update Item
 app.get('/update/:id', async (req, res) => {
 
     await mongoose.connect(uri).then(console.log('Ket noi DB thanh cong.'));
-    const sinhvien = await svModel.findById(req.params.id);
+    sinhvien = await svModel.findById(req.params.id);
+    idEdit = sinhvien._id
     res.render('home', {
-        sinhvien: sinhvien.toJSON(),
+        sinhvien,
         sinhviens
     })
 });
