@@ -1,0 +1,36 @@
+<h1 class="modal-title fs-5 my-3" id="exampleModalLabel">Chỉnh sửa nhân viên</h1>
+<div class="modal-body">
+    <form method="post" action="/edit/{{obj._id}}">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="tieude" value="{{obj.tieude}}" placeholder="FullName"
+                name="tieude" required>
+            <label for="fullname">Tiêu đề</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="noidung" value="{{obj.noidung}}" placeholder="UserName"
+                name="noidung" required>
+            <label for="username">Nội dung</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="img" value="{{obj.img}}" name="img" placeholder="Password">
+            <label for="password" required>Ảnh</label>
+        </div>
+
+        <div class="form-check">
+            {{#if obj.status}}
+            <input class="form-check-input" name="status" type="checkbox" value="Checked" checked>
+            {{else}}
+            <input class="form-check-input" name="status" type="checkbox" value="Checked">
+            {{/if}}
+            <label class="form-check-label" for="flexCheckDefault">
+                Trạng thái
+            </label>
+        </div>
+        <div class="modal-footer mb-3">
+            <a href="/" class="btn btn-primary mx-2">Back</a>
+            <button type="submit" class="btn btn-primary">Sửa</button>
+        </div>
+    </form>
+</div>
